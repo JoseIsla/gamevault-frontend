@@ -21,7 +21,7 @@ const ProductPage = () => {
   useEffect(() => {
     const fetchProduct = async () => {
       try {
-        const res = await fetch(`http://localhost:5000/api/products/${id}`);
+        const res = await fetch(`${import.meta.env.VITE_API_URL}/api/products/${id}`);
         const data = await res.json();
         setProduct(data);
       } catch (err) {
@@ -35,10 +35,9 @@ const ProductPage = () => {
   useEffect(() => {
     const fetchRelated = async () => {
       try {
-        const res = await fetch(`http://localhost:5000/api/products`);
+        const res = await fetch(`${import.meta.env.VITE_API_URL}/api/products`);
         const data = await res.json();
         if (product) {
-          // Mismo tipo de plataforma, pero excluyendo el actual
           const filtered = data
             .filter((p) => p._id !== product._id && p.platform === product.platform)
             .slice(0, 4);
@@ -51,6 +50,7 @@ const ProductPage = () => {
 
     if (product) fetchRelated();
   }, [product]);
+
 
   if (!product) return <div className="text-center py-20">Cargando producto...</div>;
 

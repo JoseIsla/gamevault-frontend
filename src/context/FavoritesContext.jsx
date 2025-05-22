@@ -9,7 +9,7 @@ export const FavoritesProvider = ({ children }) => {
 
   useEffect(() => {
     if (user?._id) {
-      fetch(`http://localhost:5000/api/favorites/${user._id}`)
+      fetch(`${import.meta.env.VITE_API_URL}/api/favorites/${user._id}`)
         .then(res => res.json())
         .then(data => setFavorites(data || []))
         .catch(err => console.error('Error cargando favoritos', err));
@@ -20,7 +20,7 @@ export const FavoritesProvider = ({ children }) => {
 
   const addFavorite = async (product) => {
     if (!user) return;
-    await fetch('http://localhost:5000/api/favorites/add', {
+    await fetch(`${import.meta.env.VITE_API_URL}/api/favorites/add`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ userId: user._id, productId: product._id })
@@ -30,7 +30,7 @@ export const FavoritesProvider = ({ children }) => {
 
   const removeFavorite = async (productId) => {
     if (!user) return;
-    await fetch('http://localhost:5000/api/favorites/remove', {
+    await fetch(`${import.meta.env.VITE_API_URL}/api/favorites/remove`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ userId: user._id, productId })

@@ -8,7 +8,7 @@ export const AuthProvider = ({ children }) => {
   // Obtener datos completos del usuario desde el backend
   const fetchUserData = async (userId) => {
     try {
-      const res = await fetch(`http://localhost:5000/api/auth/${userId}`);
+      const res = await fetch(`${import.meta.env.VITE_API_URL}/api/auth/${userId}`);
       const data = await res.json();
       if (res.ok) {
         setUser(data.user);

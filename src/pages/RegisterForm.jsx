@@ -22,39 +22,38 @@ const RegisterForm = () => {
   };
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
+  e.preventDefault();
 
-    // Validaciones básicas
-    if (form.email !== form.confirmEmail) {
-      return setError('Los correos no coinciden');
-    }
-    if (form.password !== form.confirmPassword) {
-      return setError('Las contraseñas no coinciden');
-    }
+  if (form.email !== form.confirmEmail) {
+    return setError('Los correos no coinciden');
+  }
+  if (form.password !== form.confirmPassword) {
+    return setError('Las contraseñas no coinciden');
+  }
 
-    try {
-      const res = await fetch('http://localhost:5000/api/auth/register', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          firstName: form.firstName,
-          lastName: form.lastName,
-          email: form.email,
-          password: form.password,
-        }),
-      });
+  try {
+    const res = await fetch(`${import.meta.env.VITE_API_URL}/api/auth/register`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        firstName: form.firstName,
+        lastName: form.lastName,
+        email: form.email,
+        password: form.password,
+      }),
+    });
 
-      const data = await res.json();
+    const data = await res.json();
 
-      if (!res.ok) throw new Error(data.message || 'Error al registrar');
+    if (!res.ok) throw new Error(data.message || 'Error al registrar');
 
-      // Éxito: redirigir al login
-      navigate('/login');
+    navigate('/login');
 
-    } catch (err) {
-      setError(err.message);
-    }
-  };
+  } catch (err) {
+    setError(err.message);
+  }
+};
+
 
   return (
     <div className="min-h-screen bg-[#121212] text-white flex items-center justify-center px-4 pt-12 mt-[-210px]">

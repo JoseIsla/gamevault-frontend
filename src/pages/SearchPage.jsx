@@ -11,16 +11,12 @@ const SearchPage = () => {
    const { t } = useLanguage();
 
   useEffect(() => {
+  fetch(`${import.meta.env.VITE_API_URL}/api/products?search=${encodeURIComponent(term)}`)
+    .then(res => res.json())
+    .then(data => setProducts(data || []))
+    .catch(err => console.error('Error al cargar productos:', err));
+}, [term]);
 
-    fetch(`http://localhost:5000/api/products?search=${encodeURIComponent(term)}`)
-      .then(res => res.json())
-      
-      .then(data => setProducts(data || []))
-      .catch(err => console.error('Error al cargar productos:', err));
-
-    
-
-  }, [term]);
 
   return (
     <div className="bg-[#121212] text-white min-h-screen px-4 py-8">

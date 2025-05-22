@@ -9,12 +9,13 @@ const SuccessPage = () => {
 
   useEffect(() => {
     if (sessionId) {
-      fetch(`http://localhost:5000/api/orders/session/${sessionId}`)
+      fetch(`${import.meta.env.VITE_API_URL}/api/orders/session/${sessionId}`)
         .then(res => res.json())
         .then(data => setOrder(data.order))
         .catch(err => console.error('Error cargando orden:', err));
     }
   }, [sessionId]);
+
 
   if (!order) {
     return <div className="text-white text-center mt-10">Cargando pedido...</div>;

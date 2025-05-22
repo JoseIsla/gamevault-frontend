@@ -1,14 +1,14 @@
 import { useState, useEffect } from 'react';
 import { useAuth } from '../context/AuthContext';
 import SectionHeader from '../components/SectionHeader';
-import {useLanguage } from '../context/LanguageContext';
+import { useLanguage } from '../context/LanguageContext';
 
 const AccountPage = () => {
   const { user, login, logout } = useAuth();
   const [activeSection, setActiveSection] = useState('datos');
   const [message, setMessage] = useState(null);
   const [orders, setOrders] = useState([]);
-     const { t } = useLanguage();
+  const { t } = useLanguage();
 
   const [formData, setFormData] = useState({
     firstName: user?.firstName || '',
@@ -22,7 +22,8 @@ const AccountPage = () => {
   // 🔄 Cargar pedidos al entrar en la sección de pedidos
   useEffect(() => {
     if (activeSection === 'pedidos') {
-      fetch(`http://localhost:5000/api/orders/user/${user._id}`)
+      fetch(`${import.meta.env.VITE_API_URL}/api/orders/user/${user._id}`)
+
         .then(res => res.json())
         .then(data => setOrders(data.orders))
         .catch(err => console.error('Error cargando pedidos:', err));
@@ -38,7 +39,7 @@ const AccountPage = () => {
 
   const handleUpdate = async () => {
     try {
-      const res = await fetch(`http://localhost:5000/api/auth/update/${user._id || user.id}`, {
+      const res = await fetch(`${import.meta.env.VITE_API_URL}/api/auth/update/${user._id || user.id}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData)
@@ -59,7 +60,7 @@ const AccountPage = () => {
   return (
     <div className="bg-[#121212] text-white min-h-screen px-4 py-8">
       <div className="max-w-4xl mx-auto">
-        <SectionHeader title={`${t('panelUsuario')}`}/>
+        <SectionHeader title={`${t('panelUsuario')}`} />
 
         <div className="flex flex-col md:flex-row mt-6 bg-[#1e1e1e] rounded shadow-lg overflow-hidden">
           {/* Sidebar */}
@@ -132,7 +133,7 @@ const AccountPage = () => {
                   onClick={handleUpdate}
                   className="bg-[#ff4c60] hover:bg-[#ff004c] text-white px-4 py-2 rounded mt-4"
                 >
-                 {t("actualizarDatos")}
+                  {t("actualizarDatos")}
                 </button>
               </div>
             )}

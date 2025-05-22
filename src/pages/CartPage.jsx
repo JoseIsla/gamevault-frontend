@@ -1,4 +1,4 @@
-// ...importaciones
+
 import { useCart } from '../context/CartContext';
 import { useCurrency } from '../context/CurrencyContext';
 import SectionHeader from '../components/SectionHeader';
@@ -38,7 +38,7 @@ const CartPage = () => {
     if (!couponCode.trim() || appliedCoupon) return;
 
     try {
-      const res = await fetch(`http://localhost:5000/api/coupons/${couponCode}`);
+      const res = await fetch(`${import.meta.env.VITE_API_URL}/api/coupons/${couponCode}`);
       const data = await res.json();
       if (!res.ok) throw new Error(data.message || 'Cupón inválido');
 
@@ -49,6 +49,7 @@ const CartPage = () => {
       setCouponMessage({ type: 'error', text: `❌ ${err.message}` });
     }
   };
+
 
   const handleRemoveCoupon = () => {
     removeCoupon();
@@ -126,7 +127,7 @@ const CartPage = () => {
                   >
                     {t("aplicar")}
                   </button>
-               
+
                 </div>
                 {couponMessage && (
                   <p className={`mt-2 text-sm ${couponMessage.type === 'success' ? 'text-green-400' : 'text-red-500'}`}>

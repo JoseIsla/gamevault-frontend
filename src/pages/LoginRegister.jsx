@@ -11,7 +11,7 @@ const LoginRegister = () => {
 
   const handleLogin = async () => {
     try {
-      const res = await fetch('http://localhost:5000/api/auth/login', {
+      const res = await fetch(`${import.meta.env.VITE_API_URL}/api/auth/login`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, password })
@@ -28,13 +28,14 @@ const LoginRegister = () => {
     }
   };
 
+
   return (
     <div className="min-h-screen bg-[#121212] text-white flex items-center justify-center px-4 pt-12 mt-[-210px]">
       <div className="w-full max-w-5xl mt-[-100px]">
         <SectionHeader title="Iniciar sesión / Registrarse" />
 
         <div className="bg-[#1e1e1e] rounded-lg shadow-lg w-full p-8 flex flex-col md:flex-row gap-6">
-          
+
           {/* LOGIN */}
           <div className="w-full md:w-1/2">
             <h3 className="text-lg font-bold text-[#ff004c] mb-4">Iniciar sesión</h3>

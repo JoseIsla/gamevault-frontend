@@ -7,7 +7,7 @@ const UpcomingProductGrid = () => {
   useEffect(() => {
     const fetchUpcoming = async () => {
       try {
-        const res = await fetch('http://localhost:5000/api/products?upcoming=true');
+        const res = await fetch(`${import.meta.env.VITE_API_URL}/api/products?upcoming=true`);
         const data = await res.json();
         setUpcoming(data.slice(0, 8)); // solo los 8 primeros
       } catch (err) {

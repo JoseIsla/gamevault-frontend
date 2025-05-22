@@ -31,7 +31,7 @@ const Navbar = () => {
   useEffect(() => {
     const delayDebounce = setTimeout(() => {
       if (query.length > 1) {
-        fetch(`http://localhost:5000/api/products?search=${query}`)
+        fetch(`${import.meta.env.VITE_API_URL}/api/products?search=${query}`)
           .then(res => res.json())
           .then(data => setResults(data))
           .catch(err => console.error(err));

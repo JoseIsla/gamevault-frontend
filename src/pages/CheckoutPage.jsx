@@ -33,9 +33,9 @@ const CheckoutPage = () => {
 
   const discountAmount = appliedCoupon
     ? cartItems.reduce(
-        (sum, item) => sum + item.price * item.quantity * (appliedCoupon.discount / 100),
-        0
-      )
+      (sum, item) => sum + item.price * item.quantity * (appliedCoupon.discount / 100),
+      0
+    )
     : 0;
 
   const total = subtotal;
@@ -51,7 +51,7 @@ const CheckoutPage = () => {
         price: item.finalPrice
       }));
 
-      const res = await fetch('http://localhost:5000/api/orders/create-checkout-session', {
+      const res = await fetch(`${import.meta.env.VITE_API_URL}/api/orders/create-checkout-session`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({

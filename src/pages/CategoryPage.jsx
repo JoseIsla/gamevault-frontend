@@ -11,7 +11,7 @@ const CategoryPage = () => {
   const { t } = useLanguage();
 
   useEffect(() => {
-    fetch(`http://localhost:5000/api/products?categoria=${encodeURIComponent(categoria)}`)
+    fetch(`${import.meta.env.VITE_API_URL}/api/products?categoria=${encodeURIComponent(categoria)}`)
       .then(res => res.json())
       .then(data => setProducts(data || []))
       .catch(err => console.error('Error al cargar productos:', err));
