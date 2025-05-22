@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react';
 import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
+import { Link } from 'react-router-dom';
+
 
 const UpcomingSlider = () => {
   const [slides, setSlides] = useState([]);
@@ -34,14 +36,15 @@ const UpcomingSlider = () => {
   return (
     <section className="w-full bg-black py-6">
       <div className="max-w-[1100px] mx-auto relative">
-        <a href={slides[current].link} className="block overflow-hidden rounded-md shadow-lg transition duration-500 hover:opacity-90">
-          <img
-            src={slides[current]?.image}
-            alt={slides[current]?.title}
-            className="w-full object-cover max-h-[500px]"
-            loading="lazy"
-          />
-        </a>
+       <Link to={slides[current].link} className="block overflow-hidden rounded-md shadow-lg transition duration-500 hover:opacity-90">
+  <img
+    src={slides[current]?.image}
+    alt={slides[current]?.title}
+    className="w-full object-cover max-h-[500px]"
+    loading="lazy"
+  />
+</Link>
+
         {/* Botones */}
         <button onClick={prevSlide} className="absolute left-2 top-1/2 -translate-y-1/2 bg-[#121212] text-white p-2 rounded-full hover:bg-[#ff004c] transition">
           <FaChevronLeft />
