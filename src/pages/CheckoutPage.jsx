@@ -1,7 +1,8 @@
 import { useCart } from '../context/CartContext';
 import { useCurrency } from '../context/CurrencyContext';
 import SectionHeader from '../components/SectionHeader';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
+import { useEffect } from 'react';
 import { loadStripe } from '@stripe/stripe-js';
 import { useAuth } from '../context/AuthContext';
 import { useLanguage } from '../context/LanguageContext';
@@ -12,8 +13,16 @@ const CheckoutPage = () => {
   const { cartItems, appliedCoupon, clearCart } = useCart();
   const { currency, format } = useCurrency();
   const navigate = useNavigate();
+  const location = useLocation();
   const { user } = useAuth();
   const { t } = useLanguage();
+
+  // 🔒 Redirigir si no hay usuario logueado
+  useEffect(() => {
+    if (!user) {
+      navigate(`/login?redirect=${encodeURIComponent(location.pathname)}`);
+    }
+  }, [user, navigate, location.pathname]);
 
   const itemsWithFinalPrice = cartItems.map(item => {
     const basePrice = item.price;
@@ -33,14 +42,20 @@ const CheckoutPage = () => {
 
   const discountAmount = appliedCoupon
     ? cartItems.reduce(
-      (sum, item) => sum + item.price * item.quantity * (appliedCoupon.discount / 100),
-      0
-    )
+        (sum, item) => sum + item.price * item.quantity * (appliedCoupon.discount / 100),
+        0
+      )
     : 0;
 
   const total = subtotal;
 
   const handleStripePayment = async () => {
+    // Validación por si el usuario fue eliminado o expira sesión
+    if (!user || !user._id) {
+      alert('Debes iniciar sesión para completar tu compra.');
+      return navigate(`/login?redirect=${encodeURIComponent(location.pathname)}`);
+    }
+
     try {
       const formattedItems = itemsWithFinalPrice.map(item => ({
         _id: item._id,
@@ -68,7 +83,6 @@ const CheckoutPage = () => {
       if (!res.ok) throw new Error('No se pudo crear la sesión de pago');
 
       const { id: sessionId } = await res.json();
-
       const stripe = await stripePromise;
       const result = await stripe.redirectToCheckout({ sessionId });
 
@@ -126,3 +140,4 @@ const CheckoutPage = () => {
 };
 
 export default CheckoutPage;
+
