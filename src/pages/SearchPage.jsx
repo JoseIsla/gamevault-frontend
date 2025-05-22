@@ -49,7 +49,7 @@ const SearchPage = () => {
                 {/* Contenido */}
                 <div className="p-4 flex-1">
                   <h3 className="font-bold text-lg mb-1">{product.title}</h3>
-                  <p className="text-[#ccc] text-sm mb-1">{t("plataforma")}: {product.platform}}</p>
+                  <p className="text-[#ccc] text-sm mb-1">{t("plataforma")}: {product.platform}</p>
                   {product.discount > 0 && (
                     <p className="text-sm text-[#ff004c] font-bold mb-1">-{product.discount}%</p>
                   )}
