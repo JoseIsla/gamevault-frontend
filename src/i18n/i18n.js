@@ -21,7 +21,7 @@ export const translations = {
     resultadosPara: "Resultados para",
     misFavoritos: "Mis favoritos",
     noFavoritos: "No tienes juegos en favoritos.",
-    pedidoConfirmado: "✅ Pedido confirmado",
+    pedidoConfirmado: "Pedido confirmado",
     graciasCompra: "Gracias por tu compra. Aquí tienes las claves de activación:",
     novedades: "Novedades",
     prepago: "Prepago",
@@ -76,7 +76,11 @@ export const translations = {
     confirmarCorreo:"Confirmar correo",
     creaCuenta:"Crea tu cuenta",
     logReg:"Iniciar sesión/Registrarse",
-    repiteCorreo:"Repite tu correo"
+    repiteCorreo:"Repite tu correo",
+    clave:"Clave"
+  
+    
+    
     
 
 
@@ -104,7 +108,7 @@ export const translations = {
     resultadosPara: "Results for",
     misFavoritos: "My favorites",
     noFavoritos: "You don’t have any favorite games.",
-    pedidoConfirmado: "✅ Order confirmed",
+    pedidoConfirmado: "Order confirmed",
     graciasCompra: "Thanks for your purchase. Here are your activation keys:",
     novedades: "New",
     ofertasDiarias: "Daily Deals",
@@ -160,7 +164,8 @@ export const translations = {
     confirmarCorreo:"Confirm your email",
     creaCuenta:"Create your account",
      logReg:"Log In/Register",
-     repiteCorreo:"Confirm your email"
+     repiteCorreo:"Confirm your email",
+     clave:"Key"
 
 
 
