@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import SectionHeader from '../components/SectionHeader';
 import { useNavigate } from 'react-router-dom';
+import { useLanguage } from '../context/LanguageContext';
 
 const RegisterForm = () => {
   const navigate = useNavigate();
@@ -13,6 +14,7 @@ const RegisterForm = () => {
     password: '',
     confirmPassword: '',
   });
+    const { t } = useLanguage();
 
   const [error, setError] = useState('');
 
@@ -61,31 +63,31 @@ const RegisterForm = () => {
         onSubmit={handleSubmit}
         className="bg-[#1e1e1e] rounded-lg shadow-lg w-full max-w-4xl p-8 space-y-8"
       >
-        <SectionHeader title="Crea tu cuenta" />
+        <SectionHeader title={`${t('creaCuenta')}`} />
 
         {/* Información personal */}
         <div className="grid md:grid-cols-2 gap-4">
           <div>
-            <label className="block mb-1 text-[#e0e0e0]">Nombre</label>
+            <label className="block mb-1 text-[#e0e0e0]">{t("nombre")}</label>
             <input
               type="text"
               name="firstName"
               value={form.firstName}
               onChange={handleChange}
               className="w-full px-4 py-3 rounded bg-[#121212] text-white placeholder-[#e0e0e0] focus:outline-none"
-              placeholder="Tu nombre"
+              placeholder={t("nombre")}
               required
             />
           </div>
           <div>
-            <label className="block mb-1 text-[#e0e0e0]">Apellidos</label>
+            <label className="block mb-1 text-[#e0e0e0]">{t("apellido")}</label>
             <input
               type="text"
               name="lastName"
               value={form.lastName}
               onChange={handleChange}
               className="w-full px-4 py-3 rounded bg-[#121212] text-white placeholder-[#e0e0e0] focus:outline-none"
-              placeholder="Tus apellidos"
+              placeholder={t("apellido")}
               required
             />
           </div>
@@ -94,31 +96,31 @@ const RegisterForm = () => {
         {/* Datos de acceso */}
         <div className="grid md:grid-cols-2 gap-4">
           <div>
-            <label className="block mb-1 text-[#e0e0e0]">Correo electrónico</label>
+            <label className="block mb-1 text-[#e0e0e0]">{t("correo")}</label>
             <input
               type="email"
               name="email"
               value={form.email}
               onChange={handleChange}
               className="w-full px-4 py-3 rounded bg-[#121212] text-white placeholder-[#e0e0e0] focus:outline-none"
-              placeholder="email@ejemplo.com"
+              placeholder="email@email.com"
               required
             />
           </div>
           <div>
-            <label className="block mb-1 text-[#e0e0e0]">Confirmar correo</label>
+            <label className="block mb-1 text-[#e0e0e0]">{t("confirmarCorreo")}</label>
             <input
               type="email"
               name="confirmEmail"
               value={form.confirmEmail}
               onChange={handleChange}
               className="w-full px-4 py-3 rounded bg-[#121212] text-white placeholder-[#e0e0e0] focus:outline-none"
-              placeholder="Repite el correo"
+              placeholder={t("repiteCorreo")}
               required
             />
           </div>
           <div>
-            <label className="block mb-1 text-[#e0e0e0]">Contraseña</label>
+            <label className="block mb-1 text-[#e0e0e0]">{t("contraseña")}</label>
             <input
               type="password"
               name="password"
@@ -130,7 +132,7 @@ const RegisterForm = () => {
             />
           </div>
           <div>
-            <label className="block mb-1 text-[#e0e0e0]">Confirmar contraseña</label>
+            <label className="block mb-1 text-[#e0e0e0]">{t("confirmarContraseña")}</label>
             <input
               type="password"
               name="confirmPassword"
@@ -154,7 +156,7 @@ const RegisterForm = () => {
             type="submit"
             className="mt-4 px-6 py-3 bg-[#ff4c60] text-white rounded hover:bg-[#ff004c] transition"
           >
-            Crear cuenta
+            {t("creaCuenta")}
           </button>
         </div>
       </form>

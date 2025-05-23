@@ -62,7 +62,23 @@ export const translations = {
     cuponAplicado: "Aplicado correctamente",
     eliminarCupon: "Eliminar cupón",
     finalizarCompra:"Finalizar compra",
-    copy:"Todos los derechos reservados"
+    copy:"Todos los derechos reservados",
+    iniciarSesion:"Iniciar Sesion",
+    registrarse:"Registrarse",
+    correo:"Correo electrónico",
+    contraseña:"Contraseña",
+    entrar:"Entrar",
+    inicioMensaje:"¿Ya tienes cuenta? Inicia sesión aqui",
+    registroMensaje:"Haz clic en el botón y completa el formulario para unirte a nuestra comunidad",
+    consigue:"Consigue hasta 30 insignias",
+    recibe:"Recibe descuentos y beneficios",
+    forma:"Forma parte de la comunidad",
+    confirmarCorreo:"Confirmar correo",
+    creaCuenta:"Crea tu cuenta",
+    logReg:"Iniciar sesión/Registrarse",
+    repiteCorreo:"Repite tu correo"
+    
+
 
 
   },
@@ -130,7 +146,22 @@ export const translations = {
     cuponAplicado: "applied successfully",
     eliminarCupon: "Remove coupon",
     finalizarCompra:"Checkout",
-    copy:"All rights reserved"
+    copy:"All rights reserved",
+    iniciarSesion:"Login",
+    registrarse:"Register",
+    correo:"Email",
+    contraseña:"Password",
+    entrar:"LogIn",
+    inicioMensaje:"Already have an account? Log in here",
+    registroMensaje:"Click the button and complete the register form to join our community",
+    consigue:"Get up to 30 insights",
+    recibe:"Get benneficts and discounts",
+    forma:"Join the community",
+    confirmarCorreo:"Confirm your email",
+    creaCuenta:"Create your account",
+     logReg:"Log In/Register",
+     repiteCorreo:"Confirm your email"
+
 
 
 
