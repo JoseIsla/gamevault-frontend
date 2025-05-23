@@ -18,7 +18,7 @@ const SuccessPage = () => {
 
 
   if (!order) {
-    return <div className="text-white text-center mt-10">Cargando pedido...</div>;
+    return <div className="text-white text-center mt-10">{t("cargando")}...</div>;
   }
 
   return (

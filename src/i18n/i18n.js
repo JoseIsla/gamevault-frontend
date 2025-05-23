@@ -77,7 +77,8 @@ export const translations = {
     creaCuenta:"Crea tu cuenta",
     logReg:"Iniciar sesión/Registrarse",
     repiteCorreo:"Repite tu correo",
-    clave:"Clave"
+    clave:"Clave",
+    cargando:"Cargando pedido"
   
     
     
@@ -165,7 +166,8 @@ export const translations = {
     creaCuenta:"Create your account",
      logReg:"Log In/Register",
      repiteCorreo:"Confirm your email",
-     clave:"Key"
+     clave:"Key",
+     cargando:"Loading order"
 
 
 
