@@ -19,11 +19,9 @@ const AccountPage = () => {
     confirmPassword: ''
   });
 
-  // 🔄 Cargar pedidos al entrar en la sección de pedidos
   useEffect(() => {
     if (activeSection === 'pedidos') {
       fetch(`${import.meta.env.VITE_API_URL}/api/orders/user/${user._id}`)
-
         .then(res => res.json())
         .then(data => setOrders(data.orders))
         .catch(err => console.error('Error cargando pedidos:', err));
@@ -99,40 +97,31 @@ const AccountPage = () => {
 
             {activeSection === 'config' && (
               <div className="space-y-4 mt-4 max-w-lg">
-                <div>
-                  <label className="block text-sm">{t("nombre")}</label>
-                  <input name="firstName" value={formData.firstName} onChange={handleInputChange}
-                    className="w-full p-2 bg-[#121212] border border-[#333] rounded" />
-                </div>
-                <div>
-                  <label className="block text-sm">{t("apellido")}</label>
-                  <input name="lastName" value={formData.lastName} onChange={handleInputChange}
-                    className="w-full p-2 bg-[#121212] border border-[#333] rounded" />
-                </div>
-                <div>
-                  <label className="block text-sm">Email</label>
-                  <input name="email" value={formData.email} onChange={handleInputChange}
-                    className="w-full p-2 bg-[#121212] border border-[#333] rounded" />
-                </div>
+                {/* Inputs config */}
+                {['firstName', 'lastName', 'email'].map((field) => (
+                  <div key={field}>
+                    <label className="block text-sm">{t(field)}</label>
+                    <input
+                      name={field}
+                      value={formData[field]}
+                      onChange={handleInputChange}
+                      className="w-full p-2 bg-[#121212] border border-[#333] rounded"
+                    />
+                  </div>
+                ))}
                 <div>
                   <label className="block text-sm">{t("contraseñaActual")}</label>
-                  <input type="password" name="currentPassword" value={formData.currentPassword} onChange={handleInputChange}
-                    className="w-full p-2 bg-[#121212] border border-[#333] rounded" />
+                  <input type="password" name="currentPassword" value={formData.currentPassword} onChange={handleInputChange} className="w-full p-2 bg-[#121212] border border-[#333] rounded" />
                 </div>
                 <div>
                   <label className="block text-sm">{t("nuevaContraseña")}</label>
-                  <input type="password" name="newPassword" value={formData.newPassword} onChange={handleInputChange}
-                    className="w-full p-2 bg-[#121212] border border-[#333] rounded" />
+                  <input type="password" name="newPassword" value={formData.newPassword} onChange={handleInputChange} className="w-full p-2 bg-[#121212] border border-[#333] rounded" />
                 </div>
                 <div>
                   <label className="block text-sm">{t("confirmarContraseña")}</label>
-                  <input type="password" name="confirmPassword" value={formData.confirmPassword} onChange={handleInputChange}
-                    className="w-full p-2 bg-[#121212] border border-[#333] rounded" />
+                  <input type="password" name="confirmPassword" value={formData.confirmPassword} onChange={handleInputChange} className="w-full p-2 bg-[#121212] border border-[#333] rounded" />
                 </div>
-                <button
-                  onClick={handleUpdate}
-                  className="bg-[#ff4c60] hover:bg-[#ff004c] text-white px-4 py-2 rounded mt-4"
-                >
+                <button onClick={handleUpdate} className="bg-[#ff4c60] hover:bg-[#ff004c] text-white px-4 py-2 rounded mt-4">
                   {t("actualizarDatos")}
                 </button>
               </div>
@@ -143,19 +132,23 @@ const AccountPage = () => {
                 {orders.length === 0 ? (
                   <p className="text-[#ccc]">Aún no has realizado ningún pedido.</p>
                 ) : (
-                  orders.map((order, i) => (
-                    <div key={i} className="bg-[#1e1e1e] p-4 rounded border border-[#333]">
-                      <h3 className="font-bold text-lg mb-2">{t("pedidoDel")} {new Date(order.createdAt).toLocaleDateString()}</h3>
-                      <ul className="space-y-2">
-                        {order.items.map((item, j) => (
-                          <li key={j} className="text-sm">
-                            <span className="font-semibold">{item.title}</span> — {item.platform} — <span className="text-[#00bfa6] font-mono">{item.key || 'Clave no disponible'}</span>
-                          </li>
-                        ))}
-                      </ul>
-                      <p className="mt-2 text-xs text-[#aaa]">Total: {order.total} {order.currency.toUpperCase()}</p>
-                    </div>
-                  ))
+                  [...orders]
+                    .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
+                    .map((order, i) => (
+                      <div key={i} className="bg-[#1e1e1e] p-4 rounded border border-[#333]">
+                        <h3 className="font-bold text-lg mb-2">
+                          {t("pedidoDel")} {new Date(order.createdAt).toLocaleDateString()}
+                        </h3>
+                        <ul className="space-y-2">
+                          {order.items.map((item, j) => (
+                            <li key={j} className="text-sm">
+                              <span className="font-semibold">{item.title}</span> — {item.platform} — <span className="text-[#00bfa6] font-mono">{item.key || 'Clave no disponible'}</span>
+                            </li>
+                          ))}
+                        </ul>
+                        <p className="mt-2 text-xs text-[#aaa]">Total: {order.total} {order.currency.toUpperCase()}</p>
+                      </div>
+                    ))
                 )}
               </div>
             )}
@@ -167,3 +160,4 @@ const AccountPage = () => {
 };
 
 export default AccountPage;
+
